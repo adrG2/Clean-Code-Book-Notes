@@ -1,36 +1,400 @@
 <!DOCTYPE html>
-    <html>
-    <head>
-        <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-        <title>Nombres con sentido</title>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.10.0/dist/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
-        <link href="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.css" rel="stylesheet" type="text/css">
-        <style>
-.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+<html>
+<head>
+<title>Nombres.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+	font-size: 14px;
+	padding: 0 12px;
+	line-height: 22px;
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	color: #4080D0;
+	text-decoration: none;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+	font-size: inherit;
+	line-height: auto;
+}
+
+a:hover {
+	color: #4080D0;
+	text-decoration: underline;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left: 5px solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 14px;
+	line-height: 19px;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+.mac code {
+	font-size: 12px;
+	line-height: 18px;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+/** Theming */
+
+.vscode-light,
+.vscode-light pre code {
+	color: rgb(30, 30, 30);
+}
+
+.vscode-dark,
+.vscode-dark pre code {
+	color: #DDD;
+}
+
+.vscode-high-contrast,
+.vscode-high-contrast pre code {
+	color: white;
+}
+
+.vscode-light code {
+	color: #A31515;
+}
+
+.vscode-dark code {
+	color: #D7BA7D;
+}
+
+.vscode-light pre:not(.hljs),
+.vscode-light code > div {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre:not(.hljs),
+.vscode-dark code > div {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre:not(.hljs),
+.vscode-high-contrast code > div {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+.vscode-light blockquote,
+.vscode-dark blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.vscode-high-contrast blockquote {
+	background: transparent;
+	border-color: #fff;
+}
 </style>
-        <style>
-            body {
-                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
-                font-size: 14px;
-                line-height: 1.6;
-            }
-        </style>
-        
-        <script src="https://cdn.jsdelivr.net/npm/katex-copytex@latest/dist/katex-copytex.min.js"></script>
-    </head>
-    <body>
-        <h1 id="nombres-con-sentido">Nombres con sentido</h1>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family:  "Meiryo", "Segoe WPC", "Segoe UI", "SFUIText-Light", "HelveticaNeue-Light", sans-serif, "Droid Sans Fallback";
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+</head>
+<body>
+<h1 id="nombres-con-sentido">Nombres con sentido</h1>
 <h4 id="nombres-que-revelen-intenciones">Nombres que revelen intenciones</h4>
 <p>El nombre de una variable, función o clase debe responder una serie de cuestiones básicas. Debe indicar por qué existe, qué hace y cómo se usa. Si un nombre requiere un comentario, significa que no revela su cometido.</p>
-<pre><code class="language-java"><div><span class="hljs-keyword">int</span> d; <span class="hljs-comment">//tiempo transcurrido en días</span>
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> d; <span class="hljs-comment">//tiempo transcurrido en días</span>
 <span class="hljs-keyword">int</span> elapsedTimeInDays;
 <span class="hljs-keyword">int</span> daysSinceCreation;
 <span class="hljs-keyword">int</span> fileAgeInDays;
 </div></code></pre>
 <p>En este ejemplo se observa que se necesita un nombre que especifique lo que se mide y la unidad de dicha medida.</p>
-<pre><code class="language-java"><div><span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Cell&gt; <span class="hljs-title">getFlaggedCells</span><span class="hljs-params">()</span> </span>{
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Cell&gt; <span class="hljs-title">getFlaggedCells</span><span class="hljs-params">()</span> </span>{
     List&lt;Cell&gt; flaggedCells = <span class="hljs-keyword">new</span> ArrayList&lt;Cell&gt;();
     <span class="hljs-keyword">for</span> (Cell cell : gameBoard)
         <span class="hljs-keyword">if</span> (cell.isFlagged())
@@ -94,11 +458,11 @@
 <p>Si una variable o constante se usa en varios puntos del código, debe asignarle un nombre que se pueda buscar</p>
 </blockquote>
 <p>Compara:</p>
-<pre><code class="language-Java"><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">34</span>, j++)
+<pre class="hljs"><code><div><span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> j = <span class="hljs-number">0</span>; j &lt; <span class="hljs-number">34</span>, j++)
     s += (t[j] * <span class="hljs-number">4</span>) / <span class="hljs-number">5</span>;
 </div></code></pre>
 <p>con</p>
-<pre><code class="language-Java"><div><span class="hljs-keyword">int</span> realDaysPerIdealDay = <span class="hljs-number">4</span>;
+<pre class="hljs"><code><div><span class="hljs-keyword">int</span> realDaysPerIdealDay = <span class="hljs-number">4</span>;
 <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> WORK_DAYS_PER_WEEK = <span class="hljs-number">5</span>;
 <span class="hljs-keyword">int</span> sum = <span class="hljs-number">0</span>;
 
@@ -134,7 +498,7 @@
 </blockquote>
 <h4 id="no-se-exceda-con-el-atractivo">No se exceda con el atractivo</h4>
 <p>Si los nombres son demasiado inteligentes, sólo los recordará quién lo ha escrito.</p>
-<pre><code><div>Claridad &gt; Entretenimiento
+<pre class="hljs"><code><div>Claridad &gt; Entretenimiento
 </div></code></pre>
 <h4 id="una-palabra-por-concepto">Una palabra por concepto</h4>
 <blockquote>
@@ -151,7 +515,7 @@ Es imposible recordar qué método equivale a cada clase.</p>
 </blockquote>
 <p>Ejemplo: método <code>add()</code></p>
 <p>Si utilizas el siguiente método <code>add()</code> con un fin equivalente en varias clases:</p>
-<pre><code class="language-Java"><div><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">add</span><span class="hljs-params">(String izquierda, String derecha)</span> </span>{
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">add</span><span class="hljs-params">(String izquierda, String derecha)</span> </span>{
     <span class="hljs-keyword">return</span> izquierda + derecha;
 }
 </div></code></pre>
@@ -177,6 +541,82 @@ Es imposible recordar qué método equivale a cada clase.</p>
 <p>Variables: <code>street</code>, <code>houseNumber</code>, <code>city</code>, <code>state</code> y <code>zipCode</code>.Parece que forman una dirección. Ahora bien, si <code>state</code> es usado en otro método... ¿cómo distinguirlo? Habría que añadir contexto.</p>
 <p>Una forma de añadirlo sería con prefijos tales como: <code>addrState</code> , <code>addrHouseNumber</code>, etc. Aunque la mejor forma de dar contexto es creando la class <code>Address</code>.</p>
 <h5 id="variables-en-un-contexto-ambiguo">Variables en un contexto ambiguo</h5>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">printGuessStatistics</span><span class="hljs-params">(<span class="hljs-keyword">char</span> candidate, <span class="hljs-keyword">int</span> count)</span> </span>{
+    String number;
+    String verb;
+    String pluralModifier;
 
-    </body>
-    </html>
+    <span class="hljs-keyword">if</span> (count == <span class="hljs-number">0</span>) {
+        number = <span class="hljs-string">"no"</span>;
+        verb = <span class="hljs-string">"are"</span>;
+        pluralModifier = <span class="hljs-string">"s"</span>;
+    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (count == <span class="hljs-number">1</span>) {
+        number = <span class="hljs-string">"1"</span>;
+        verb = <span class="hljs-string">"is"</span>;
+        pluralModifier = <span class="hljs-string">""</span>;
+    } <span class="hljs-keyword">else</span> {
+        number = Integer.toString(count);
+        verb = <span class="hljs-string">"are"</span>;
+        pluralModifier = <span class="hljs-string">"s"</span>;
+    }
+
+    String guessMessage = String.format(<span class="hljs-string">"There %s %s %s%s"</span>, verb, number, candidate, pluralModifier);
+
+    print(guessMessage);
+}
+</div></code></pre>
+<p>Para dividir la función en fragmentos más reducidos necesitamos crear una clase <code>GuessStatisticsMessage</code>. La mejora del contexto hace que el algoritmo sea más limpio y se divida en funciones más reducidas:</p>
+<h5 id="variables-con-un-contexto">Variables con un contexto</h5>
+<pre class="hljs"><code><div>    <span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GuessStatisticsMessage</span> </span>{
+        <span class="hljs-keyword">private</span> String number;
+        <span class="hljs-keyword">private</span> String verb;
+        <span class="hljs-keyword">private</span> String pluralModifier;
+
+        <span class="hljs-function"><span class="hljs-keyword">public</span> Strin <span class="hljs-title">gmake</span><span class="hljs-params">(<span class="hljs-keyword">char</span> candidate, <span class="hljs-keyword">int</span> count)</span> </span>{
+            <span class="hljs-keyword">return</span> String.format(<span class="hljs-string">"There %s %s %s%s"</span>, verb, number, candidate, pluralModifier);
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">createPluralDependentMessageParts</span><span class="hljs-params">(<span class="hljs-keyword">int</span> count)</span> </span>{
+            <span class="hljs-keyword">if</span> ( count == <span class="hljs-number">0</span> ) {
+                thereAreNoLetters();
+            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (count == <span class="hljs-number">1</span>) {
+                thereIsOneLetter();
+            } <span class="hljs-keyword">else</span> {
+                thereAreManyLetters(count);
+            }
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">thereAreManyLetters</span><span class="hljs-params">(<span class="hljs-keyword">int</span> count)</span> </span>{
+            number = Integer.toString(count);
+            verb = <span class="hljs-string">"are"</span>;
+            pluralModifier = <span class="hljs-string">"s"</span>;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">thereIsOneLetter</span><span class="hljs-params">()</span> </span>{
+            number = <span class="hljs-string">"1"</span>;
+            verb = <span class="hljs-string">"is"</span>;
+            pluralModifier = <span class="hljs-string">""</span>;
+        }
+
+        <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">void</span> <span class="hljs-title">thereAreNoLetters</span><span class="hljs-params">()</span> </span>{
+            number = <span class="hljs-string">"no"</span>;
+            verb = <span class="hljs-string">"are"</span>;
+            pluralModifier = <span class="hljs-string">"s"</span>;
+        }
+    }
+</div></code></pre>
+<h4 id="no-a%C3%B1adir-contextos-innecesarios">No añadir contextos innecesarios</h4>
+<blockquote>
+<p>Los nombres breves suelen ser más adecuados que los extensos, siempre que sean claros.</p>
+</blockquote>
+<blockquote>
+<p>No añada más contexto del necesario a un nombre</p>
+</blockquote>
+<p>Los nombres <code>accountAddress</code> y <code>customerAddress</code> son perfectos para instancias de la clase <code>Address</code> pero no sirven como nombres de clase.</p>
+<p>Para distinguir entre direcciones mac, puertos y web, podría usar: <code>PostalAddress</code>, <code>MAC</code> y <code>URI</code>.</p>
+<blockquote>
+<p>El objetivo de cualquier nombre es ser más preciso</p>
+</blockquote>
+
+</body>
+</html>
